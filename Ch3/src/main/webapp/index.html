@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자기소개 입력폼</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f4ff, #d6eaff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            width: 400px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #444;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        input[type="text"]:focus {
+            border-color: #5a8dee;
+            outline: none;
+            box-shadow: 0 0 5px rgba(90,141,238,0.3);
+        }
+        button {
+            background-color: #5a8dee;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #4a7ddc;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h1>자기소개 입력폼</h1>
+    <form action="/save" method="post">
+        <div class="form-group">
+            <label for="name">이름:</label>
+            <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+            <label for="age">나이:</label>
+            <input type="text" id="age" name="age" required />
+        </div>
+        <div class="form-group">
+            <label for="mbti">MBTI:</label>
+            <input type="text" id="mbti" name="mbti" placeholder="예: INTP" />
+        </div>
+        <div class="form-group">
+            <label for="favoriteFood">좋아하는 음식 (쉼표로 구분):</label>
+            <input type="text" id="favoriteFood" name="favoriteFood" placeholder="예: 라면, 치킨, 초밥" />
+        </div>
+        <button type="submit">제출</button>
+    </form>
+</div>
+</body>
+</html>
