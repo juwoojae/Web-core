@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>제출 결과</title>
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body { background: #f0f4f8; font-family: 'Noto Sans KR', sans-serif; }
+        .card { border-radius: 16px; padding: 1.5rem; margin-top: 50px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);}
+        .chip { display: inline-block; padding: 0.5rem 1rem; margin: 0.3rem; background: #fff; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); text-align: center;}
+        .chip small { color: #6b7280; font-size: 0.8rem; display: block; }
+        .chip div { font-weight: 600; color: #111827; margin-top: 2px; }
+    </style>
+</head>
+<body th:style="'background: ' + ${backgroundColor} + '; font-family: Noto Sans KR, sans-serif;'">
+<div class="container d-flex justify-content-center">
+    <div class="card text-center col-md-6">
+
+        <h3 class="mb-3">안녕하세요!</h3>
+
+        <!-- 간결한 한 문장 -->
+        <p class="lead">
+            저는 <span th:text="${age} ?: '—'"></span>살이고
+            <span th:text="${mbti} ?: '—'"></span>
+            <span th:text="${mbtiimg} ?: '—'"></span>이며
+            <span th:text="${food} ?: '—'"></span>을 좋아하고
+            <span th:text="${color} ?: '—'"></span>를 좋아해요!
+        </p>
+
+        <!-- 개별 정보 표시 -->
+        <div>
+            <div class="chip">
+                <small>나이</small>
+                <div th:text="${age} ?: '미입력'"></div>
+            </div>
+            <div class="chip">
+                <small>MBTI</small>
+                <div th:text="${mbti} ?: '미입력'"></div>
+            </div>
+            <div class="chip">
+                <small>좋아하는 음식</small>
+                <div th:text="${food} ?: '미입력'"></div>
+            </div>
+            <div class="chip">
+                <small>좋아하는 색</small>
+                <div th:text="${color} ?: '미입력'"></div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="/" class="btn btn-outline-secondary me-2">다시 입력</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
