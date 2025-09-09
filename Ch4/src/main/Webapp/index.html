@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>점심 메뉴 웰컴 페이지</title>
+  <style>
+    /* 전체 페이지 스타일 */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #74ebd5, #ACB6E5);
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    /* 페이지 타이틀 */
+    h1 {
+        color: #fff;
+        font-size: 3em;
+        margin-bottom: 50px;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    /* 버튼 컨테이너 */
+    .button-container {
+        display: flex;
+        gap: 20px;
+    }
+
+    /* 버튼 스타일 */
+    .menu-button {
+        padding: 20px 40px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #fff;
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        text-decoration: none;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .menu-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    /* 반응형 */
+    @media (max-width: 600px) {
+        .button-container {
+            flex-direction: column;
+        }
+    }
+  </style>
+</head>
+<body>
+<h1>점심 메뉴 선택</h1>
+<div class="button-container">
+  <a class="menu-button" href="/lunch/form">점심 메뉴 등록</a>
+  <a class="menu-button" href="/lunch/menus">점심 메뉴 목록 조회</a>
+  <a class="menu-button" href="/lunch/recommend">랜덤 추천</a>
+</div>
+</body>
+</html>
