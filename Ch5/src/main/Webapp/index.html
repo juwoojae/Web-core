@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>점심 메뉴 등록</title>
+    <style>
+        body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+        }
+
+        .container {
+          background: white;
+          padding: 30px 40px;
+          border-radius: 15px;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+          width: 320px;
+          text-align: center;
+        }
+
+        h2 {
+          margin-bottom: 20px;
+          color: #333;
+        }
+
+        form {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        label {
+          text-align: left;
+          font-size: 14px;
+          font-weight: bold;
+          color: #555;
+        }
+
+        input, select {
+          padding: 10px;
+          font-size: 14px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          transition: border 0.2s;
+        }
+
+        input:focus, select:focus {
+          border-color: #4CAF50;
+          outline: none;
+        }
+
+        .btn {
+          padding: 12px;
+          font-size: 15px;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: bold;
+          transition: background 0.3s;
+        }
+
+        .btn-save {
+          background: #4CAF50;
+          color: white;
+        }
+
+        .btn-save:hover {
+          background: #43a047;
+        }
+
+        .btn-list {
+          background: #2196F3;
+          color: white;
+          margin-top: 10px;
+        }
+
+        .btn-list:hover {
+          background: #1976d2;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>🍱 점심 메뉴 등록</h2>
+
+    <form id="menuForm">
+        <div>
+            <label>이름</label>
+            <input type="text" name="name" placeholder="예: 김치찌개" required>
+        </div>
+
+        <div>
+            <label>맵기</label>
+            <select name="spicy" required>
+                <option value="">-- 선택하세요 --</option>
+                <option value="안매움">안매움</option>
+                <option value="보통">보통</option>
+                <option value="매움">매움</option>
+            </select>
+        </div>
+
+        <div>
+            <label>가격</label>
+            <input type="number" name="price" placeholder="예: 8000" required>
+        </div>
+
+        <button type="submit" class="btn btn-save">저장하기</button>
+    </form>
+
+    <button class="btn btn-list" onclick="window.location.href='list.html'">
+        저장된 메뉴 보러가기 →
+    </button>
+</div>
+
+<script>
+
+    const form = document.getElementById("menuForm");
+
+    // 폼 제출 이벤트 처리
+    form.addEventListener("submit", (e) => {
+    e.preventDefault(); //기본동작 x
+    // 입력값 가져오기
+    const name = form.name.value.trim();   // 메뉴 이름
+    const spicy = form.spicy.value;         // 맵기 정도
+    const price = form.price.value;           // 가격
+
+    //예외 처리 : 입력이 다 안된경우
+    if (!name || !price || ! spicy)  {
+    alert("모든 항목을 입력해주세요!");
+    return;
+    }
+
+    // 기존 메뉴 가져오기 js객체로
+    const menus = JSON.parse(localStorage.getItem("menus")) || [];
+
+    // 새 메뉴 추가
+    menus.push({ name, spicy, price });
+    //menus.push({ name: name, spicy: spicy, price: price });
+
+
+    /*
+    1. localStorage 는 문자열 형태만 저장할수 있음
+    2. localStorage에 다시 저장 (JSON 문자열로 변환 후 저장)
+
+    */
+    localStorage.setItem("menus", JSON.stringify(menus));
+
+    // UI 갱신
+    loadMenus();
+
+    // 입력 초기화
+    form.reset();
+    });
+</script>
+</body>
+</html>

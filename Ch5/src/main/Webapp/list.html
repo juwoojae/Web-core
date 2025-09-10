@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>저장된 점심 메뉴</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background: #f0f2f5;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px;
+      margin: 5px 0;
+      background: #f4f4f4;
+      border-radius: 5px;
+    }
+
+    .menu-text {
+      flex: 1;
+    }
+
+    button {
+      margin-left: 5px;
+      padding: 4px 8px;
+      font-size: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .edit-btn {
+      background: #ffc107;
+      color: #333;
+    }
+
+    .edit-btn:hover {
+      background: #e0a800;
+    }
+
+    .delete-btn {
+      background: #dc3545;
+      color: white;
+    }
+
+    .delete-btn:hover {
+      background: #c82333;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<h2>저장된 메뉴 목록</h2>
+<ul id="menuList"></ul>
+
+<a href="index.html">← 메뉴 등록하러 가기</a>
+
+<script>
+  const menuList = document.getElementById("menuList");
+
+  // 메뉴 불러오기
+  function loadMenus() {
+    const menus = JSON.parse(localStorage.getItem("menus")) || [];
+    menuList.innerHTML = "";
+
+    if (menus.length === 0) {
+      menuList.innerHTML = "<li>등록된 메뉴가 없습니다.</li>";
+      return;
+    }
+
+    menus.forEach((menu, index) => {
+      const li = document.createElement("li");
+
+      // 메뉴 텍스트
+      const span = document.createElement("span");
+      span.className = "menu-text";
+      span.textContent = `${menu.name} / ${menu.spicy} / ${menu.price}원`;
+
+      // 수정 버튼
+      const editBtn = document.createElement("button");
+      editBtn.className = "edit-btn";
+      editBtn.textContent = "수정";
+      editBtn.onclick = () => editMenu(index);
+
+      // 삭제 버튼
+      const deleteBtn = document.createElement("button");
+      deleteBtn.className = "delete-btn";
+      deleteBtn.textContent = "삭제";
+      deleteBtn.onclick = () => deleteMenu(index);
+
+      li.appendChild(span);
+      li.appendChild(editBtn);
+      li.appendChild(deleteBtn);
+
+      menuList.appendChild(li);
+    });
+  }
+
+  // 메뉴 삭제
+  function deleteMenu(index) {
+    const menus = JSON.parse(localStorage.getItem("menus")) || [];
+    menus.splice(index, 1); // 해당 메뉴 삭제
+    localStorage.setItem("menus", JSON.stringify(menus));
+    loadMenus(); // UI 갱신
+  }
+
+  // 메뉴 수정
+  function editMenu(index) {
+    const menus = JSON.parse(localStorage.getItem("menus")) || [];
+    const menu = menus[index];
+
+    const newName = prompt("메뉴 이름을 수정하세요:", menu.name);
+    const newSpicy = prompt("맵기 정도를 수정하세요:", menu.spicy);
+    const newPrice = prompt("가격을 수정하세요:", menu.price);
+
+    if (newName && newSpicy && newPrice) {
+      menus[index] = { name: newName, spicy: newSpicy, price: newPrice };
+      localStorage.setItem("menus", JSON.stringify(menus));
+      loadMenus(); // UI 갱신
+    }
+  }
+
+  loadMenus(); // 페이지 로드 시 메뉴 표시
+</script>
+</body>
+</html>
+
